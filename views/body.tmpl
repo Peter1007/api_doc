@@ -1,0 +1,162 @@
+{{define "body"}}
+{{template "header"}}
+<body><h1 id="banner-">{{.ServiceName}}</h1>
+<hr>
+<ul>
+<li>url: <strong><code>http://{{.BaseMs}}.yunjiazheng.com/{{.ServiceUrl}}</code></strong></li>
+<li>当前版本: <strong><code>v{{.Version}}</code></strong></li>
+<li>所有版本: <strong>
+<a href=""><code>v{{.Version}}</code></a> 
+</strong></li>
+<li>系统: <strong><code>{{.MS}}</code></strong></li>
+<li>描述: <strong><code>{{.Description}}</code></strong></li>
+<li>是否可用: <strong><code>{{if .AvailableStatus}}可用{{else}}不可用{{end}}</code></strong></li>
+<li>author: <strong><code>{{.Author}}</code></strong></li>
+<li><p>联系方式:</p>
+<ul>
+<li><p>qq: 
+<strong><code>作者未填写</code></strong></p>
+</li>
+<li><p>手机: <strong><code>作者未填写</code></strong></p>
+</li>
+<li>邮箱: <strong><code>作者为填写</code></strong></li>
+</ul>
+</li>
+<li>最后更新时间: <strong><code>{{.ModTime}}</code></strong></li>
+</ul>
+<hr>
+<h3 id="-">请求方式</h3>
+<ul>
+<li>request_type: <strong><code>{{.Request.RequestType}}</code></strong></li>
+<li>request_params_type: <strong><code>{{.Request.RequestParamsType}}</code></strong></li>
+</ul>
+<h3 id="-">请求参数</h3>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>参数名</th>
+        <th>参数类型</th>
+        <th>是否必须</th>
+        <th>示例值</th>
+        <th>默认值</th>
+        <th>描述</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+	{{range .Request.RequestParams}}
+	    <tr class="" >
+	        <td>{{.Name}}</td>
+	        <td>{{.Type}}</td>
+	        <td>{{if .Required}}是{{else}}否{{end}}</td>
+	        <td>{{.Example}}</td>
+	        <td>{{.Default}}</td>
+	        <td>{{.Description}}</td>
+	        <td>{{.Remark}}</td>
+	    </tr>
+		{{range .Child}}
+		    <tr class="success" >
+		        <td>&nbsp;&nbsp;<code>--</code>{{.Name}}</td>
+		        <td>{{.Type}}</td>
+		        <td>{{if .Required}}是{{else}}否{{end}}</td>
+		        <td>{{.Example}}</td>
+		        <td>{{.Default}}</td>
+		        <td>{{.Description}}</td>
+		        <td>{{.Remark}}</td>
+		    </tr>
+			{{range .Child}}
+			    <tr class="info" >
+			        <td>&nbsp;&nbsp;&nbsp;&nbsp;<code>--</code>{{.Name}}</td>
+			        <td>{{.Type}}</td>
+			        <td>{{if .Required}}是{{else}}否{{end}}</td>
+			        <td>{{.Example}}</td>
+			        <td>{{.Default}}</td>
+			        <td>{{.Description}}</td>
+			        <td>{{.Remark}}</td>
+			    </tr>
+			{{end}}
+		{{end}}
+	{{end}}
+    </tbody>
+</table>
+
+<hr>
+<h3 id="-">返回参数</h3>
+{{range .Response.ResponseParams}}
+<p><code>{{.Description}}</code></p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>参数名</th>
+            <th>参数类型</th>
+            <th>示例值</th>
+            <th>默认值</th>
+            <th>描述</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+	{{range .Params}}
+	    <tr class="">
+	        <td>{{.Name}}</td>
+	        <td>{{.Type}}</td>
+	        <td>{{.Example}}</td>
+	        <td>{{.Default}}</td>
+	        <td>{{.Description}}</td>
+	        <td>{{.Remark}}</td>
+	    </tr>
+		{{range .Child}}
+		    <tr class="success" >
+		        <td>&nbsp;&nbsp;<code>--</code>{{.Name}}</td>
+		        <td>{{.Type}}</td>
+		        <td>{{.Example}}</td>
+		        <td>{{.Default}}</td>
+		        <td>{{.Description}}</td>
+		        <td>{{.Remark}}</td>
+		    </tr>
+			{{range .Child}}
+			    <tr class="info" >
+			        <td>&nbsp;&nbsp;&nbsp;&nbsp;<code>--</code>{{.Name}}</td>
+			        <td>{{.Type}}</td>
+			        <td>{{.Example}}</td>
+			        <td>{{.Default}}</td>
+			        <td>{{.Description}}</td>
+			        <td>{{.Remark}}</td>
+			    </tr>
+			{{end}}
+		{{end}}
+	{{end}}
+    </tbody>
+</table>
+{{end}}
+
+<hr>
+<h3 id="-">错误码介绍</h3>
+<table class="table-hover">
+    <tr>
+        <th>错误码</th>
+        <th>错误信息</th>
+    </tr>
+	{{range .Response.ResponseError}}
+	    <tr>
+	        <td>{{.Status}}</td>
+	        <td>{{.Data}}</td>
+	    </tr>
+	{{end}}
+</table>
+
+<hr>
+<h3 id="-">请求示例</h3>
+<pre><code>{{.Request.RequestExample}}
+</code></pre>
+<h3 id="-">返回示例</h3>
+<pre class="prettyprint"><code>{{.Response.ResponseExample}}
+</code></pre>
+<script>
+var api_desc = {
+    service_url:'http://{{.BaseMs}}.yunjiazheng.com/{{.ServiceUrl}}',
+    request:JSON.parse('{{.Request.RequestExample}}')
+}
+</script>
+{{template "footer"}}
+{{end}}

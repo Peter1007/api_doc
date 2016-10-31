@@ -1,0 +1,212 @@
+{{define "slow_list"}}
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云家政-渔夫</title>
+<style type="text/css">
+table
+{
+border-collapse:collapse;
+border: 1px solid;
+}
+table, td
+{
+    border:1px solid black;
+    padding:5px 0;
+}
+tr 
+{
+    text-align:center
+}
+.content
+{
+    font-size:15px
+}
+.sql_text
+{
+    text-align:left;
+}
+a,a:link,a:hover,a:active,a:visited
+{
+    font-size:15px; text-decoration:none; color:blue; margin:5px;
+}
+.page{color:red; font-weight:bold;}
+</style>
+</head>
+    
+<body>
+<h2>云家政-渔夫 V1.0</h2>
+
+<div style="width:1800px">
+    <span class="ms">日期:</span>
+                    <a href="?date=20150601">20150601</a>
+                            <a href="?date=20150602">20150602</a>
+                            <a href="?date=20150603">20150603</a>
+                            <a href="?date=20150611">20150611</a>
+                            <a href="?date=20150821">20150821</a>
+                            <a href="?date=20150822">20150822</a>
+                            <a href="?date=20150823">20150823</a>
+                            <a href="?date=20150824">20150824</a>
+                            <a href="?date=20150825">20150825</a>
+                            <a href="?date=20150826">20150826</a>
+                            <a href="?date=20150827">20150827</a>
+                            <a href="?date=20150828">20150828</a>
+                            <a href="?date=20150829">20150829</a>
+            20150830</div>
+
+<table class="table" width="1800">
+    <tr bgcolor="#00CCFF" class="title">
+        <td>开始时间</td>
+		<td>运行时间</td>
+		<td>锁表时间</td>
+		<td>返回记录数</td>
+		<td>检查记录数</td>
+		<td>数据库</td>
+		<td>sql语句</td>
+        <td>分析</td>
+    </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>3</td>
+            <td>0</td>
+            <td>442</td>
+            <td>83398</td>
+            <td>ayi</td>
+            <td class="sql_text">SELECT store_id, count(1) as review_count, SUM(jr.ayi_service_qos) as review_ds
+FROM job_review as jr
+WHERE jr.status = 1 and jr.added_time > '1438272001'
+GROUP BY jr.store_id</td>
+            <td><a href="/mysql/profile?db=ayi&sql=SELECT+store_id%2C+count%281%29+as+review_count%2C+SUM%28jr.ayi_service_qos%29+as+review_ds%0AFROM+job_review+as+jr%0AWHERE+jr.status+%3D+1+and+jr.added_time+%3E+%271438272001%27%0AGROUP+BY+jr.store_id">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>243760</td>
+            <td>order</td>
+            <td class="sql_text">select m.order_id,m.order_no,m.third_party_business_order_no from order_main as m
+left join order_once_cleaning as oc on m.order_id = oc.order_id
+where (m.`status` = 9 or m.`status` = 18) and oc.service_begin_time > 1430236800 
+and m.source = 16
+and m.script_assist_flag = '10'
+and ( oc.service_begin_time + '2974' + (oc.clean_hours) * '3600' ) < '1440864001'
+order by order_id desc limit 20</td>
+            <td><a href="/mysql/profile?db=order&sql=select+m.order_id%2Cm.order_no%2Cm.third_party_business_order_no+from+order_main+as+m%0Aleft+join+order_once_cleaning+as+oc+on+m.order_id+%3D+oc.order_id%0Awhere+%28m.%60status%60+%3D+9+or+m.%60status%60+%3D+18%29+and+oc.service_begin_time+%3E+1430236800+%0Aand+m.source+%3D+16%0Aand+m.script_assist_flag+%3D+%2710%27%0Aand+%28+oc.service_begin_time+%2B+%272974%27+%2B+%28oc.clean_hours%29+%2A+%273600%27+%29+%3C+%271440864001%27%0Aorder+by+order_id+desc+limit+20">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>243853</td>
+            <td>order</td>
+            <td class="sql_text">select m.order_id,m.order_no,m.third_party_business_order_no from order_main as m
+left join order_once_cleaning as oc on m.order_id = oc.order_id
+where (m.`status` = 9 or m.`status` = 18)  
+and m.source = 17
+and m.script_assist_flag = '0'
+and ( oc.service_begin_time + '3409' + (oc.clean_hours) * '3600' ) < '1440864001'
+order by order_id desc limit 20</td>
+            <td><a href="/mysql/profile?db=order&sql=select+m.order_id%2Cm.order_no%2Cm.third_party_business_order_no+from+order_main+as+m%0Aleft+join+order_once_cleaning+as+oc+on+m.order_id+%3D+oc.order_id%0Awhere+%28m.%60status%60+%3D+9+or+m.%60status%60+%3D+18%29++%0Aand+m.source+%3D+17%0Aand+m.script_assist_flag+%3D+%270%27%0Aand+%28+oc.service_begin_time+%2B+%273409%27+%2B+%28oc.clean_hours%29+%2A+%273600%27+%29+%3C+%271440864001%27%0Aorder+by+order_id+desc+limit+20">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>2</td>
+            <td>243758</td>
+            <td>order</td>
+            <td class="sql_text">SELECT `order_id`,`user_id`,`order_no`,`name`,`mobile`,`worktype_id`,`city_id`,`worktype_id` FROM `order_main` WHERE `status` = 4 AND `updated_time` < '1440864001' AND upgrade_version = '3' AND script_flag = 0 ORDER BY order_id DESC limit 100</td>
+            <td><a href="/mysql/profile?db=order&sql=SELECT+%60order_id%60%2C%60user_id%60%2C%60order_no%60%2C%60name%60%2C%60mobile%60%2C%60worktype_id%60%2C%60city_id%60%2C%60worktype_id%60+FROM+%60order_main%60+WHERE+%60status%60+%3D+4+AND+%60updated_time%60+%3C+%271440864001%27+AND+upgrade_version+%3D+%273%27+AND+script_flag+%3D+0+ORDER+BY+order_id+DESC+limit+100">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>243758</td>
+            <td>order</td>
+            <td class="sql_text">SELECT `m`.`order_no`, `s`.`order_id`, `s`.`store_id`, count(`s`.`store_id`) as count
+FROM `order_main` `m`
+LEFT JOIN `order_store` `s`
+ON `m`.`order_id` = `s`.`order_id`
+WHERE m.status = 2
+AND m.is_assign_store > 0
+AND m.step_time >= 1440864241
+AND m.step_time < 1440864301
+GROUP BY m.order_id</td>
+            <td><a href="/mysql/profile?db=order&sql=SELECT+%60m%60.%60order_no%60%2C+%60s%60.%60order_id%60%2C+%60s%60.%60store_id%60%2C+count%28%60s%60.%60store_id%60%29+as+count%0AFROM+%60order_main%60+%60m%60%0ALEFT+JOIN+%60order_store%60+%60s%60%0AON+%60m%60.%60order_id%60+%3D+%60s%60.%60order_id%60%0AWHERE+m.status+%3D+2%0AAND+m.is_assign_store+%3E+0%0AAND+m.step_time+%3E%3D+1440864241%0AAND+m.step_time+%3C+1440864301%0AGROUP+BY+m.order_id">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>244312</td>
+            <td>order</td>
+            <td class="sql_text">select m.order_id,m.order_no,m.third_party_business_order_no from order_main as m
+left join order_once_cleaning as oc on m.order_id = oc.order_id
+where (m.`status` = 9 or m.`status` = 18) and oc.service_begin_time > 1430236800 
+and m.source = 16
+and m.script_assist_flag = '0'
+and ( oc.service_begin_time + '607' + (oc.clean_hours) * '0' ) < '1440864001'
+order by order_id desc limit 20</td>
+            <td><a href="/mysql/profile?db=order&sql=select+m.order_id%2Cm.order_no%2Cm.third_party_business_order_no+from+order_main+as+m%0Aleft+join+order_once_cleaning+as+oc+on+m.order_id+%3D+oc.order_id%0Awhere+%28m.%60status%60+%3D+9+or+m.%60status%60+%3D+18%29+and+oc.service_begin_time+%3E+1430236800+%0Aand+m.source+%3D+16%0Aand+m.script_assist_flag+%3D+%270%27%0Aand+%28+oc.service_begin_time+%2B+%27607%27+%2B+%28oc.clean_hours%29+%2A+%270%27+%29+%3C+%271440864001%27%0Aorder+by+order_id+desc+limit+20">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>243758</td>
+            <td>order</td>
+            <td class="sql_text">SELECT s.order_store_id,s.order_id,s.`status`,count(*) as num,m.order_id,m.`status`,ssi.is_employ FROM order_store as s 
+LEFT JOIN order_main as m ON s.order_id = m.order_id 
+LEFT JOIN order_store_service_info as ssi ON ssi.order_store_id = s.order_store_id 
+WHERE m.worktype_id != '8' 
+AND m.`status` = 9 AND m.upgrade_version = '3' 
+AND m.script_flag = 0 
+GROUP BY s.order_id order by s.order_store_id DESC</td>
+            <td><a href="/mysql/profile?db=order&sql=SELECT+s.order_store_id%2Cs.order_id%2Cs.%60status%60%2Ccount%28%2A%29+as+num%2Cm.order_id%2Cm.%60status%60%2Cssi.is_employ+FROM+order_store+as+s+%0ALEFT+JOIN+order_main+as+m+ON+s.order_id+%3D+m.order_id+%0ALEFT+JOIN+order_store_service_info+as+ssi+ON+ssi.order_store_id+%3D+s.order_store_id+%0AWHERE+m.worktype_id+%21%3D+%278%27+%0AAND+m.%60status%60+%3D+9+AND+m.upgrade_version+%3D+%273%27+%0AAND+m.script_flag+%3D+0+%0AGROUP+BY+s.order_id+order+by+s.order_store_id+DESC">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:05</td>
+            <td>4</td>
+            <td>0</td>
+            <td>6</td>
+            <td>243782</td>
+            <td>order</td>
+            <td class="sql_text">SELECT s.order_store_id,s.order_id,s.`status`,count(*) as num,m.order_id,m.`status` FROM order_store as s LEFT JOIN order_main as m ON s.order_id = m.order_id WHERE m.worktype_id != '8' AND m.`status` = 2 AND m.upgrade_version = '3' AND m.script_flag = 0 GROUP BY s.order_id order by s.order_store_id DESC</td>
+            <td><a href="/mysql/profile?db=order&sql=SELECT+s.order_store_id%2Cs.order_id%2Cs.%60status%60%2Ccount%28%2A%29+as+num%2Cm.order_id%2Cm.%60status%60+FROM+order_store+as+s+LEFT+JOIN+order_main+as+m+ON+s.order_id+%3D+m.order_id+WHERE+m.worktype_id+%21%3D+%278%27+AND+m.%60status%60+%3D+2+AND+m.upgrade_version+%3D+%273%27+AND+m.script_flag+%3D+0+GROUP+BY+s.order_id+order+by+s.order_store_id+DESC">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:06</td>
+            <td>5</td>
+            <td>0</td>
+            <td>639</td>
+            <td>83398</td>
+            <td>ayi</td>
+            <td class="sql_text">SELECT 		store_id, ROUND(AVG(ayi_service_qos), 0) score
+FROM 		job_review
+GROUP BY 	store_id</td>
+            <td><a href="/mysql/profile?db=ayi&sql=SELECT+%09%09store_id%2C+ROUND%28AVG%28ayi_service_qos%29%2C+0%29+score%0AFROM+%09%09job_review%0AGROUP+BY+%09store_id">profile</a></td>
+        </tr>
+            <tr class="content">
+            <td>2015-08-30 00:00:06</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>243758</td>
+            <td>order</td>
+            <td class="sql_text">SELECT `order_id`,`user_id`,`order_no`,`name`,`mobile`,`worktype_id` FROM `order_main` WHERE (`status` = 8 OR `status` = 9) AND `accept_timeout` < '1440864001' AND worktype_id != '8' AND upgrade_version = '3' AND script_flag = 0 ORDER BY order_id DESC limit 100</td>
+            <td><a href="/mysql/profile?db=order&sql=SELECT+%60order_id%60%2C%60user_id%60%2C%60order_no%60%2C%60name%60%2C%60mobile%60%2C%60worktype_id%60+FROM+%60order_main%60+WHERE+%28%60status%60+%3D+8+OR+%60status%60+%3D+9%29+AND+%60accept_timeout%60+%3C+%271440864001%27+AND+worktype_id+%21%3D+%278%27+AND+upgrade_version+%3D+%273%27+AND+script_flag+%3D+0+ORDER+BY+order_id+DESC+limit+100">profile</a></td>
+        </tr>
+    	<tr class="content">
+        <td colspan="11"><span class="page">1</span><a href="?date=20150830&page=2">2</a><a href="?date=20150830&page=3">3</a><a href="?date=20150830&page=4">4</a><a href="?date=20150830&page=5">5</a><a href="?date=20150830&page=6">6</a><span>...</span><a href="?date=20150830&page=829">829</a><a href="?date=20150830&page=830">830</a><a href="?date=20150830&page=2">﹥</a></td>
+    </tr>
+</table>
+</body>
+</html>
+{{end}}

@@ -1,0 +1,159 @@
+{{define "index"}}
+<html class="wrap" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+
+<!--图标样式-->
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+<!--主要样式-->
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+<style>
+.wrap{
+    height: 100%;
+}
+.wrap>body{
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+    height: 100%;
+}
+.div1{
+    margin: 0 30px 0 20px;
+    overflow: auto;
+    height: 100%;
+}
+.div2{
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    height: 100%;
+}
+
+.main_iframe {
+    border:0px;
+    height:100%;
+    width:100%;
+}
+.red {
+    color:red;
+}
+</style>
+
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span');
+    $('.tree > ul > li > ul  li').hide('fast');
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide();
+            $(this).find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show();
+            $(this).find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+</script>
+
+</head>
+<body>
+<div class="div1">
+    <div class="tree well">
+        <ul>
+			<li><span><a href="group_by_url.html" target="_blank">接口总览</a></span></li>
+			{{range .}}
+			{{if .Name}}
+			<li>
+				<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+				{{if .Child}}
+				<ul>
+				{{range .Child}}
+				{{if .Name}}
+					<li>
+						<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+						{{if .Child}}
+						<ul>
+						{{range .Child}}
+						{{if .Name}}
+							{{if .Child}}
+							<li>
+								<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+								<ul>
+								{{range .Child}}
+								{{if .Name}}
+									{{if .Child}}
+									<li>
+										<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+										<ul>
+										{{range .Child}}
+										{{if .Name}}
+											{{if .Child}}
+											<li>
+												<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+												<ul>
+												{{range .Child}}
+												{{if .Name}}
+													{{if .Child}}
+													<li>
+														<span><i class="icon-plus-sign"></i>{{.Name}}</span>
+													</li>
+													{{else}}
+													<li>
+														<span><i class="icon-leaf"></i><a href="/doc/detail?{{.Url}}" class = "" target="main">{{.Name}}</a></span>
+													</li> 
+													{{end}}
+												{{end}}
+												{{end}}
+												</ul>
+											</li>
+											{{else}}
+											<li>
+												<span><i class="icon-leaf"></i><a href="/doc/detail?{{.Url}}" class = "" target="main">{{.Name}}</a></span>
+											</li> 
+											{{end}}
+										{{end}}
+										{{end}}
+										</ul>
+									</li>
+									{{else}}
+									<li>
+										<span><i class="icon-leaf"></i><a href="/doc/detail?{{.Url}}" class = "" target="main">{{.Name}}</a></span>
+									</li> 
+									{{end}}
+								{{end}}
+								{{end}}
+								</ul>
+							</li>
+							{{else}}
+							<li>
+								<span><i class="icon-leaf"></i><a href="/doc/detail?{{.Url}}" class = "" target="main">{{.Name}}</a></span>
+							</li> 
+							{{end}}
+						{{end}}
+						{{end}}
+						</ul>
+						{{end}}
+					</li>
+				{{end}}
+				{{end}}
+				</ul>
+				{{end}}
+			{{end}}
+			{{end}}
+		</ul>
+    </div>
+</div>
+
+<div class="div2">
+    <iframe name="main" class="main_iframe">
+    </iframe>
+</div>
+</body>
+</html>
+{{end}}

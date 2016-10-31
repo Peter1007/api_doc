@@ -1,0 +1,184 @@
+{
+    "service_name": "Banner列表",
+    "service_url": "banner/get_list_by_platform",
+    "version": "1.0",
+    "MS": "SOA_BMS",
+    "author": "徐海君",
+    "available_status": 1,
+    "description": "根据平台ID获取Banner列表",
+    "request": {
+        "request_type": "HTTP_POST",
+        "request_params_type": "POST_BODY_RAW_JSON",
+        "request_params": [
+            {
+                "name": "meta",
+                "type": "map",
+                "required": true,
+                "example": "",
+                "default": null,
+                "description": "meta信息",
+                "remark": "",
+                "child": [
+                    {
+                        "name": "api_call_source",
+                        "type": "string",
+                        "required": true,
+                        "example": "",
+                        "default": null,
+                        "description": "发起请求的来源",
+                        "remark": ""
+                    },
+                    {
+                        "name": "version",
+                        "type": "string",
+                        "required": true,
+                        "example": "",
+                        "default": null,
+                        "description": "接口版本",
+                        "remark": ""
+                    }
+                ]
+            },
+            {
+                "name": "data",
+                "type": "map",
+                "required": true,
+                "example": "",
+                "default": null,
+                "description": "业务请求参数",
+                "remark": "",
+                "child": [
+                    {
+                        "name": "platform_id",
+                        "type": "integer",
+                        "required": true,
+                        "example": 1,
+                        "default": 0,
+                        "description": "平台ID",
+                        "remark": ""
+                    }
+                ]
+            }
+        ],
+        "request_example": {
+            "meta": {
+                "api_call_source": ""
+            },
+            "data": {
+                "platform_id": 1
+            }
+        }
+    },
+    "response": {
+        "response_params_type": "RESPONSE_BODY_JSON",
+        "response_params": [
+            {
+                "description": "",
+                "params": [
+                    {
+                        "name": "meta",
+                        "type": "string",
+                        "required": true,
+                        "example": null,
+                        "default": null,
+                        "description": "meta信息",
+                        "remark": ""
+                    },
+                    {
+                        "name": "status",
+                        "type": "integer",
+                        "required": true,
+                        "example": 0,
+                        "default": null,
+                        "description": "服务处理状态信息",
+                        "remark": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "integer",
+                        "required": true,
+                        "example": 0,
+                        "default": null,
+                        "description": "",
+                        "remark": "",
+						"child": [
+							{
+								"name": "title",
+								"type": "string",
+								"required": true,
+								"example": "春节保姆荒",
+								"default": "",
+								"description": "标题",
+								"remark": ""
+							},
+							{
+								"name": "img_url",
+								"type": "string",
+								"required": true,
+								"example": "http://beta.img.renwutao.com/website/banner/banner-txt04.png",
+								"default": "",
+								"description": "图片路径",
+								"remark": ""
+							},
+							{
+								"name": "img_href",
+								"type": "string",
+								"required": true,
+								"example": "beta.www.yjz.com",
+								"default": "",
+								"description": "图片链接地址",
+								"remark": ""
+							},
+							{
+								"name": "background_url",
+								"type": "string",
+								"required": true,
+								"example": "http://beta.img.renwutao.com/website/banner/banner04.jpg",
+								"default": "",
+								"description": "背景图片路径",
+								"remark": ""
+							},
+							{
+								"name": "descr",
+								"type": "string",
+								"required": true,
+								"example": "中华人民共和国万岁",
+								"default": "",
+								"description": "介绍",
+								"remark": ""
+							}
+						]
+                    }
+                ]
+            }
+        ],
+        "response_error": [
+            {
+                "status": 101,
+                "data": "平台错误"
+            }
+        ],
+        "response_example": [
+            {
+                "meta": "",
+                "status": 0,
+                "data": [
+					{
+						"title": "春节保姆荒",
+						"img_url": "http://beta.img.renwutao.com/website/banner/banner-txt04.png",
+						"img_href": "",
+						"background_url": "http://beta.img.renwutao.com/website/banner/banner04.jpg",
+						"descr": "中华人民共和国万岁"
+					},
+					{
+						"title": "common",
+						"img_url": "http://beta.img.renwutao.com/website/banner/banner-txt.png",
+						"img_href": "",
+						"background_url": "http://beta.img.renwutao.com/website/banner/banner01.jpg",
+						"descr": "中华人民共和国万岁"
+					}
+				]
+            }
+        ]
+    }
+}
